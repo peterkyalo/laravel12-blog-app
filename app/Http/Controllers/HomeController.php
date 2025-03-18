@@ -13,7 +13,10 @@ class HomeController extends Controller
         //Get all the categories
         $categories = Category::all();
         //Get all the posts
-        $posts = Post::OrderBy('id', 'DESC')->get();
+        $posts = Post::when(request('category_id'), function ($query) {
+            $query->where('category_id', request('category_id'));
+        })->OrderBy('id', 'DESC')
+            ->get();
         //Pass the categories to the home view
         return view('home', compact('categories', 'posts'));
     }

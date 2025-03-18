@@ -12,11 +12,11 @@
                             class="w-32 h-32 object-cover rounded">
                         <div>
                             <h3 class="text-lg font-semibold">
-                                <a href="#" class="hover:underline">
+                                <a href="{{ route('article', $post->id) }}" class="hover:underline">
                                     {{ $post->title }}
                                 </a>
                             </h3>
-                            <p class="text-gray-600">{{ $post->content }}</p>
+                            <p class="text-gray-600">{{ substr($post->content, 0, 100) }}...</p>
                             <br>
                             <strong>Created By:</strong> {{ $post->author }} <br>
                             <strong>Published On:</strong> {{ $post->created_at->format('F j, Y') }}
@@ -31,7 +31,7 @@
             <ul class="space-y-2">
                 @foreach($categories as $category)
                     <li>
-                        <a href="#" class="text-gray-600 hover:text-gray-800">
+                        <a href="/?category_id={{ $category->id }}" class="text-gray-600 hover:text-gray-800">
                             {{ $category->name }}
                         </a>
                     </li>
